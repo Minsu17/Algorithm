@@ -6,12 +6,12 @@ public class Main {
 	public static void main(String args[]) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		String arr[] = br.readLine().split("");
+		String N[] = br.readLine().split("");
 		
-		Arrays.sort(arr, Comparator.reverseOrder());
+		Arrays.sort(N, Comparator.reverseOrder()); //array 내림차순
 		
-		for(int i=0;i<arr.length;i++) {
-			System.out.print(arr[i]);
+		for(int i=0;i<N.length;i++) {
+			System.out.print(N[i]);
 		}
 		
 	}
