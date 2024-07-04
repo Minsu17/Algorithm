@@ -1,11 +1,12 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Main {
-	public static void main(String args[]) {
-		Scanner sc = new Scanner(System.in);
+	public static void main(String args[]) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		int n = sc.nextInt();
+		int n = Integer.parseInt(br.readLine());
 		int arr[] = new int[n];
 		int num[] = new int[8001];
 		int sum = 0;
@@ -13,7 +14,7 @@ public class Main {
 		int min = 4000;
 		
 		for(int i=0;i<arr.length;i++) {
-			arr[i] = sc.nextInt();
+			arr[i] = Integer.parseInt(br.readLine());
 		}
 		Arrays.sort(arr);
 		
@@ -50,6 +51,5 @@ public class Main {
 		System.out.println(arr[n/2]);
 		System.out.println(result);
 		System.out.println(max - min);
-		sc.close();
 	}
 }
