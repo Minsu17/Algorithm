@@ -1,15 +1,19 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.*;
 public class Main {
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Queue<Integer> q = new LinkedList<>();
-		ArrayList<Integer> ans = new ArrayList<>();
+		List<Integer> ans = new ArrayList<>();
+		StringBuilder sb = new StringBuilder();
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		
-		int n = sc.nextInt();
-		int k = sc.nextInt();
+		int N = Integer.parseInt(st.nextToken());
+		int K = Integer.parseInt(st.nextToken());
 		
-		for(int i=1;i<=n;i++) {
+		for(int i=1;i<=N;i++) {
 			q.add(i);
 		}
 		
@@ -18,19 +22,19 @@ public class Main {
             int tmp = q.poll();
             cnt++;
             
-            if(cnt == k) {
+            if(cnt == K) {
                 ans.add(tmp);
                 cnt = 0;
             } else {
                 q.add(tmp);
             }
         }
-		System.out.print("<");
-		for(int i=0;i<ans.size()-1;i++) {
-			System.out.print(ans.get(i) + ", ");
+		sb.append("<");
+		for(int i=0;i<ans.size();i++) {
+			sb.append(ans.get(i)).append(", ");
 		}
-		System.out.print(ans.get(ans.size()-1));
-		System.out.print(">");
+		sb.setLength(sb.length()-2);
+		sb.append(">");
+		System.out.println(sb);
 	}
-
 }
