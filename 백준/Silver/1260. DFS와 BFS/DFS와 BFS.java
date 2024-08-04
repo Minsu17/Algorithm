@@ -1,61 +1,65 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.Queue;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
-
+	
+	static int N, M, V;
 	static boolean[][] matrix;
-	static boolean[] visit;
-	static int n, m;
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+	static boolean[] visited;
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		
-		n = sc.nextInt();
-		m = sc.nextInt();
-		int v = sc.nextInt();
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
+		V = Integer.parseInt(st.nextToken());
 		
-		matrix = new boolean[n+1][n+1];
-		for(int i=0;i<m;i++) {
-			int x = sc.nextInt();
-			int y = sc.nextInt();
-			matrix[x][y] = true;
-			matrix[y][x] = true;
+		matrix = new boolean[N+1][N+1];
+		visited = new boolean[N+1];
+		for (int i = 0; i < M; i++) {
+			st = new StringTokenizer(br.readLine());
+			int u = Integer.parseInt(st.nextToken());
+			int v = Integer.parseInt(st.nextToken());
+			
+			matrix[u][v] = true;
+			matrix[v][u] = true;
 		}
 		
-		visit = new boolean[n+1];
-		dfs(v);
+		dfs(V);
 		System.out.println();
 		
-		visit = new boolean[n+1];
-		bfs(v);
+		visited = new boolean[N+1];
+		bfs(V);
+	}
+	
+	static void dfs(int v) {
+		visited[v] = true;
+		
+		System.out.print(v + " ");
+		for (int i = 1; i <= N; i++) {
+			if(!matrix[v][i] || visited[i]) continue;
+			dfs(i);
+		}
 	}
 	
 	static void bfs(int v) {
 		Queue<Integer> q = new ArrayDeque<>();
 		q.offer(v);
-		visit[v] = true;
+		visited[v] = true;
 		
 		while(!q.isEmpty()) {
 			int tmp = q.poll();
 			
 			System.out.print(tmp + " ");
 			
-			for(int i=1;i<=n;i++) {
-				if(!matrix[tmp][i] || visit[i]) continue;
+			for (int i = 1; i <= N; i++) {
+				if(!matrix[tmp][i] || visited[i]) continue;
 				q.offer(i);
-				visit[i] = true;
+				visited[i] = true;
 			}
 		}
 	}
-	
-	static void dfs(int v) {
-		visit[v] = true;
-		
-		System.out.print(v + " ");
-		for(int i=1;i<=n;i++) {
-			if(!matrix[v][i] || visit[i]) continue;
-			dfs(i);
-		}
-	}
-
 }
