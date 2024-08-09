@@ -1,57 +1,54 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
-// 부분집합
+
 public class Main {
-    
     static int N, min;
-    static int[][] src; // 재료(신,쓴)
+    static int[][] arr;
     static boolean[] select;
-    
-    public static void main(String[] args) throws Exception{
+
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        N = Integer.parseInt(br.readLine()); // 재료수
-        src = new int[N][2];
+        
+        N = Integer.parseInt(br.readLine());
+        arr = new int[N][2];
         select = new boolean[N];
         
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            src[i][0] = Integer.parseInt(st.nextToken());
-            src[i][1] = Integer.parseInt(st.nextToken());
+            arr[i][0] = Integer.parseInt(st.nextToken());  // 신맛
+            arr[i][1] = Integer.parseInt(st.nextToken());  // 쓴맛
         }
+        
         min = Integer.MAX_VALUE;
-        
-        subset(0); // 첫 번째 재료부터 시작
-        
+        backtrack(0);
         System.out.println(min);
     }
     
-    static void subset(int srcIdx) {
-        // 기저조건
-        if( srcIdx == N ) {
-            // 부분집합의 한 경우가 만들어진 상태 
-            // select true 인 재료를 사용
-            int sin = 1;
-            int ssn = 0;
-            int cnt = 0;
+    static void backtrack(int idx) {
+        if (idx == N) {
+            int S = 1;
+            int B = 0;
+            boolean flag = false;
             
             for (int i = 0; i < N; i++) {
-                if( select[i] ) {
-                    sin *= src[i][0]; // 신
-                    ssn += src[i][1]; // 쓴
-                    cnt++;
+                if (select[i]) {
+                    S *= arr[i][0];
+                    B += arr[i][1];
+                    flag = true;
                 }
             }
             
-            if( cnt > 0 ) {
-                min = Math.min(min, Math.abs(sin - ssn) ); // 절대값
+            if (flag) {
+                min = Math.min(min, Math.abs(S - B));
             }
             return;
         }
         
-        select[srcIdx] = true;
-        subset(srcIdx + 1);
-        select[srcIdx] = false;
-        subset(srcIdx + 1);
+        select[idx] = true;
+        backtrack(idx + 1);
+        
+        select[idx] = false;
+        backtrack(idx + 1);
     }
 }
