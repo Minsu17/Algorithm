@@ -1,4 +1,5 @@
 import java.util.*;
+
 class Solution {
     public int solution(String[][] clothes) {
         int answer = 1;
@@ -16,6 +17,7 @@ class Solution {
         for(int n : map.values()){
             answer *= (n + 1);
         }
+        
         return answer - 1;
     }
 }
