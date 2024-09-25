@@ -10,7 +10,7 @@ public class Main {
 
         int[] arr = new int[1000];
         int size = 0;
-        for (int i = 1; ; i++) {
+        for (int i = 1; i<1000; i++) {
             int tmp = i * (i + 1) / 2;
             if (tmp > 1000) break;
             arr[size++] = tmp;
