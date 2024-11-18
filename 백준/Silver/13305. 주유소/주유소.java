@@ -22,8 +22,8 @@ public class Main {
             price[i] = Integer.parseInt(st.nextToken());
         }
 
-        int totalCost = 0;
-        int minPrice = price[0];
+        long totalCost = 0;
+        long minPrice = price[0];
 
         for (int i = 0; i < N - 1; i++) {
             // 현재까지의 최소 기름값으로 주유
