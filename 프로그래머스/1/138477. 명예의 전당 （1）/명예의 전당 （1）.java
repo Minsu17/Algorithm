@@ -1,18 +1,14 @@
 import java.util.*;
-
 class Solution {
     public int[] solution(int k, int[] score) {
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-        int[] result = new int[score.length];
-
-        for (int i = 0; i < score.length; i++) {
-            minHeap.offer(score[i]);
-            if (minHeap.size() > k) {
-                minHeap.poll();
-            }
-            result[i] = minHeap.peek();
+        int[] answer = new int[score.length];
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        
+        for(int i=0;i<score.length;i++){
+            pq.offer(score[i]);
+            if(pq.size() > k) pq.poll();
+            answer[i] = pq.peek();
         }
-
-        return result;
+        return answer;
     }
 }
